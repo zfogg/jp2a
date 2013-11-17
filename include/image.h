@@ -21,12 +21,12 @@
 #include "jpeglib.h"
 
 typedef struct rgb_t {
-	JSAMPLE r, g, b;
+    JSAMPLE r, g, b;
 } rgb_t;
 
 typedef struct image_t {
-	int w, h;
-	rgb_t *pixels;
+    int w, h;
+    rgb_t *pixels;
 } image_t;
 
 image_t* image_read(FILE *f);
