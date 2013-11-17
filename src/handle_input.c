@@ -60,6 +60,7 @@ void *getdisplayinfo(void *arg) {
   while (recv(cf->disp_fd, frame, 10000, 0) != -1) {
     drawLine(frame);
   }
+    return 0;
 }
 
 void killCurses() {
@@ -78,7 +79,7 @@ void *startlisten(void *arg) {
     char* port = "9337";
     if ((status = getaddrinfo(NULL, port, &hints, &res)) != 0) {
       fprintf(stderr, "getaddrinfo error: %s\n", gai_strerror(status));
-      return;
+      return 0;
     }
 
     int sock = socket(res->ai_family, res->ai_socktype, res->ai_protocol);
@@ -108,6 +109,8 @@ void *startlisten(void *arg) {
     cf->isConnected = true;
     cf->new_fd      = new_fd;
     cf->disp_fd     = disp_fd;
+    
+    return 0;
 }
 
 // current: client connects to server, server sends frames to client which then sends frames
