@@ -1,0 +1,7 @@
+# $Id: setup.hint 360 2006-07-26 14:51:19Z csl $
+sdesc: "converts JPEG images to ASCII"
+ldesc: "converts JPEG images to ASCII with given output options.  Accepts URLs, filenames or standard input."
+skip:
+category: Graphics Text
+requires: libjpeg6b curl-devel libncurses5 cygwin
+external-source: jp2a
