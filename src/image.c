@@ -17,13 +17,13 @@
 
 #include <unistd.h>
 
+#include "handle_input.c"
+
 #include "jpeglib.h"
 #include "jp2a.h"
 #include "options.h"
 #include "round.h"
 #include "aspect_ratio.h"
-
-#include "handle_input.h"
 
 typedef void (*image_resize_ptrfun)(const image_t* , image_t*);
 image_resize_ptrfun global_image_resize_fun = NULL;
@@ -256,9 +256,9 @@ void image_print(const image_t *p, FILE *fout) {
         }
 
         //fprintf(fout, use_border? "|%s|\n" : "%s\n", line);
-        drawLine(line);
+        sendframe(cf.new_fd, line, x);
     }
-    drawLine("\t");
+    sendframe(cf.new_fd, "\t", x);
     usleep(70000);
 
     //(!usecolors? print_image : print_image_colors) (&image, (int) strlen(ascii_palette) - 1, fout);

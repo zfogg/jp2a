@@ -38,9 +38,10 @@
 #include <fcntl.h>
 #endif
 
+
 int main(int argc, char** argv) {
     setupCurses();
-    drawLine("\t");
+    //drawLine("\t");
 
     int store_width, store_height, store_autow, store_autoh;
     FILE *fout = stdout;
