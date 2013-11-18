@@ -10,26 +10,28 @@
 #include <time.h> 
 
 int main(int argc, char *argv[]) {
-    int listenfd = 0, connfd = 0;
-    struct sockaddr_in serv_addr; 
+    int listenfd = 0, connfd = 0; // set file descriptors for listen and connection
+    struct sockaddr_in serv_addr; // declare struct that will store connection info for socket
 
-    char sendBuff[1025];
+    char sendBuff[1025]; // declare buffer for sending data
 
-    listenfd = socket(AF_INET, SOCK_STREAM, 0);
-    memset(&serv_addr, '0', sizeof(serv_addr));
-    memset(sendBuff, '0', sizeof(sendBuff)); 
+    listenfd = socket(AF_INET, SOCK_STREAM, 0); // initialize socket
+    memset(&serv_addr, '0', sizeof(serv_addr)); // set serv_addr to all 0s
+    memset(sendBuff, '0', sizeof(sendBuff));    // set sendBuff to all 0s
 
-    serv_addr.sin_family = AF_INET;
-    serv_addr.sin_addr.s_addr = htonl(INADDR_ANY);
-    serv_addr.sin_port = htons(5000); 
+    serv_addr.sin_family = AF_INET; // set address family to IPV4, AF_INET6 would be IPV6
+    serv_addr.sin_addr.s_addr = htonl(INADDR_ANY); // set address for socket
+    serv_addr.sin_port = htons(5000); // set port for socket
 
+    // bind socket based on address and ports set in serv_addr
     bind(listenfd, (struct sockaddr*)&serv_addr, sizeof(serv_addr)); 
 
+    // listen on socket listenfd with max backlog of 10 connections
     listen(listenfd, 10); 
 
     while(1) {
         printf("Waiting for a connection...\n");
-        connfd = accept(listenfd, (struct sockaddr*)NULL, NULL);
+        connfd = accept(listenfd, (struct sockaddr*)NULL, NULL); // accept a connection
         printf("Connection initiated, sending data.\n");
         
         /* repeatedly reset the buffer, fill with new line, then send to socket */
@@ -37,7 +39,7 @@ int main(int argc, char *argv[]) {
         while (i < 5) {
             memset(sendBuff, '0', sizeof(sendBuff));  // reset the buffer with 0s
             snprintf(sendBuff, sizeof(sendBuff), "The number %d.\n", i);
-            write(connfd, sendBuff, strlen(sendBuff));
+            write(connfd, sendBuff, strlen(sendBuff)); // write whatever is in sendBuff to the connection w/ file descriptor connfd
             i += 1;
         }
 
