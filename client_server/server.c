@@ -30,9 +30,9 @@ int main(int argc, char *argv[]) {
     listen(listenfd, 10); 
 
     while(1) {
-        printf("Waiting for a connection...\n");
+        printf("1) Waiting for a connection...\n");
         connfd = accept(listenfd, (struct sockaddr*)NULL, NULL); // accept a connection
-        printf("Connection initiated, sending data.\n");
+        printf("2) Connection initiated, sending data.\n");
         
         /* repeatedly reset the buffer, fill with new line, then send to socket */
         int i = 0;
@@ -43,7 +43,7 @@ int main(int argc, char *argv[]) {
             i += 1;
         }
 
-        printf("Closing connection.\n---------------------\n");
+        printf("3) Closing connection.\n---------------------\n");
         close(connfd);
     }
 }
