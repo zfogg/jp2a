@@ -11,23 +11,9 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <string.h>
-
+#include "handle_input.h"
 
 WINDOW * win;
-
-typedef struct clientframe {
-    bool isConnected;
-    int new_fd;
-    int disp_fd;
-} Clientframe;
-Clientframe cf;
-
-
-void *startlisten(void*);
-void *getdisplayinfo(void*);
-void reallystartlisten(Clientframe*);
-void sendframe(int, char*, int);
-
 
 void setupCurses() {
     initscr();

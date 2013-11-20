@@ -38,6 +38,9 @@
 #include <fcntl.h>
 #endif
 
+#include "handle_input.h"
+#include <curses.h>
+#include <stdbool.h>
 
 int main(int argc, char** argv) {
     setupCurses();
